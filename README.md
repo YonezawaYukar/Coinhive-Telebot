@@ -13,7 +13,7 @@ vim start.py
 python start.py
 ```
 
-##You must config .py :)
+## You must config .py :)
 
 ## About it
 * 仅供学习使用
