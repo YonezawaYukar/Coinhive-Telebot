@@ -1,12 +1,13 @@
 #!/usr/bin/python
 # -*- encoding: utf-8 -*-
 from telegram.ext import Updater, CommandHandler
+import logging
 import requests
 import time
 ### Telegram Token
-Token = ''
+Token = '393380278:'
 ### Coinhive Private keys
-SecretKeys = ['']
+SecretKeys = ['','','']
 
 class CoinHive:
 	def __init__(self):
@@ -33,18 +34,19 @@ class CoinHive:
 		update.message.reply_text('\n\r'.join(self._Replys['help']))
 
 	def _gain(self ,bot ,update):
+		logging.info('/gain')
 		if time.time() - self._Last < 10:
 			return update.message.reply_text('\n\r'.join(self._Replys['notime']))
 		Hashes = 0
 		TotalHash = 0
 		PendHash = 0
 		for Secret in self._Secrets:
-			reply = self._Replys['onegain']
 			msg = requests.get(self._SiteUrl % Secret).json()
 			if not msg['success'] :
 				update.message.reply_text('\n\r'.join(self._Replys['onegainerr']))
 				continue
 			else:
+				reply = self._Replys['onegain'][:]
 				reply[0] = reply[0] % int(msg['hashesPerSecond'])
 				reply[1] = reply[1] % msg['hashesTotal']
 				reply[2] = reply[2] % msg['xmrPending']
