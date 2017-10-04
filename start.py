@@ -5,9 +5,9 @@ import logging
 import requests
 import time
 ### Telegram Token
-Token = '393380278:'
+Token = ''
 ### Coinhive Private keys
-SecretKeys = ['','','']
+SecretKeys = ['']
 
 class CoinHive:
 	def __init__(self):
